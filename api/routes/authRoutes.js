@@ -1,18 +1,10 @@
 import express from "express";
-import mysql from "mysql";
+
+import db from "../db.js";
 
 const router = express.Router();
 
-const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "silkroad",
-});
-router.get("/", (req, res) => {
-  res.send("Hello World");
-});
-
+//SIGN-UP
 router.post("/signup", (req, res) => {
   const login = req.body;
   const sql =

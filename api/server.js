@@ -11,6 +11,7 @@ app.use(
 );
 app.use(express.json());
 
+// ROUTES : "/route" indicates the HTTP URI, the latter indicates what to do at this route.
 app.use("/auth", authRoutes);
 
 app.listen(5100, () => {
