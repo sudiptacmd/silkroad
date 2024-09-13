@@ -2,7 +2,7 @@ DROP DATABASE silkroad;
 CREATE DATABASE silkroad;
 USE silkroad;
 CREATE TABLE `User` (
-  `user_id` integer(10) NOT NULL AUTO_INCREMENT,
+    `user_id` integer(10) NOT NULL AUTO_INCREMENT,
     `lastName` varchar(255) DEFAULT NULL,
     `photo` varchar(255),
     `firstName` varchar(255) DEFAULT NULL,

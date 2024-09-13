@@ -4,6 +4,9 @@ import db from "../db.js";
 
 const router = express.Router();
 
+router.get("/", (req, res) => {
+  res.send("AUTH");
+});
 //LOGIN[POST]
 router.post("/login", (req, res) => {
   const login = req.body;
@@ -11,7 +14,8 @@ router.post("/login", (req, res) => {
   db.query(sql, [login.email, login.password], (e, r) => {
     if (e) return res.json({ message: e.message });
     if (r.length > 0) {
-      console.log("LOGIN SUCCESS");
+      req.session.email = r[0].email;
+      console.log(req.session.email);
       return res.json({ loggedIn: true });
     } else {
       console.log("LOGIN FAIL");
