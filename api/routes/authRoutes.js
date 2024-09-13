@@ -4,21 +4,37 @@ import db from "../db.js";
 
 const router = express.Router();
 
-//SIGN-UP
-router.post("/signup", (req, res) => {
+//LOGIN[POST]
+router.post("/login", (req, res) => {
   const login = req.body;
+  const sql = "SELECT * FROM User where email = ? AND password = ?";
+  db.query(sql, [login.email, login.password], (e, r) => {
+    if (e) return res.json({ message: e.message });
+    if (r.length > 0) {
+      console.log("LOGIN SUCCESS");
+      return res.json({ loggedIn: true });
+    } else {
+      console.log("LOGIN FAIL");
+      return res.json({ loggedIn: false });
+    }
+  });
+});
+
+//SIGN-UP[POST]
+router.post("/signup", (req, res) => {
+  const reg = req.body;
   const sql =
     "INSERT INTO User (`email`, `password`, `firstName`, `lastName`, `photo`, `address`, `phone`, `NID`, `vendor`) VALUES (?,?,?,?,?,?,?,?,?)";
   const values = [
-    login.email,
-    login.password,
-    login.firstName,
-    login.lastName,
-    login.photo,
-    login.address,
-    login.phone,
-    login.NID,
-    login.vendor === "1" ? 1 : 0,
+    reg.email,
+    reg.password,
+    reg.firstName,
+    reg.lastName,
+    reg.photo,
+    reg.address,
+    reg.phone,
+    reg.NID,
+    reg.vendor === "1" ? 1 : 0,
   ];
   console.log(values);
   db.query(sql, values, (e, r) => {

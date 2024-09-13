@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export const RegistrationForm = () => {
+  const navigate = useNavigate();
   const [login, setLogin] = useState({
     email: "",
     fistName: "",
@@ -21,7 +23,10 @@ export const RegistrationForm = () => {
     try {
       await axios
         .post("http://localhost:5100/auth/signup", login)
-        .then((r) => navigate("/"))
+        .then((r) => {
+          console.log(r);
+          navigate("/login");
+        })
         .catch((e) => console.log(e));
     } catch (error) {
       console.log(error);

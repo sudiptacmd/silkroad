@@ -1,6 +1,9 @@
+import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const LoginForm = () => {
+  const navigate = useNavigate();
   const [login, setLogin] = useState({
     email: "",
     password: "",
@@ -8,9 +11,22 @@ export const LoginForm = () => {
   const handleInput = (e) => {
     setLogin((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(login.email, login.password);
+    try {
+      await axios
+        .post("http://localhost:5100/auth/login", login)
+        .then((r) => {
+          if (r.data.loggedIn) {
+            navigate("/");
+          } else {
+            alert("Login Failed");
+          }
+        })
+        .catch((e) => console.log(e));
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div>
