@@ -14,17 +14,13 @@ CREATE TABLE `User` (
     `shop_id` integer(10) DEFAULT NULL,
     `verified` tinyint(1) DEFAULT '0',
     `NID` varchar(255) DEFAULT NULL,
+    `shop_logo` varchar(255) DEFAULT NULL,
+  `shop_name` varchar(255) DEFAULT NULL,
     `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`user_id`)
 );
 
 
-CREATE TABLE `Shop` (
-  `shop_id` integer(10) NOT NULL AUTO_INCREMENT,
-  `shop_logo` varchar(255),
-  `shop_name` varchar(255),
-  PRIMARY KEY (`shop_id`)
-);
 
 CREATE TABLE `Product` (
   `product_id` integer(10) NOT NULL AUTO_INCREMENT,
@@ -85,10 +81,8 @@ CREATE TABLE `Cart_item` (
 );
 
 
-ALTER TABLE `User` ADD FOREIGN KEY (`shop_id`) REFERENCES `Shop` (`shop_id`);
 
-
-ALTER TABLE `Product` ADD FOREIGN KEY (`user_id`) REFERENCES `Shop` (`shop_id`);
+ALTER TABLE `Product` ADD FOREIGN KEY (`user_id`) REFERENCES `User` (`user_id`);
 
 ALTER TABLE `Review` ADD FOREIGN KEY (`product_id`) REFERENCES `Product` (`product_id`);
 
