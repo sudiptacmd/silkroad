@@ -12,7 +12,7 @@ export default function SellForm() {
     buy_price: 0,
     bid_starting_price: 0,
     bid_current_price: 0,
-    bid_end_time: "",
+    bid_end_time: 0,
   });
   const handleInput = (e) => {
     setContent((prev) => ({ ...prev, [e.target.name]: e.target.value }));
