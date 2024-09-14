@@ -11,7 +11,6 @@ CREATE TABLE `User` (
     `address` varchar(255) DEFAULT NULL,
     `phone` varchar(255) DEFAULT NULL,
     `vendor` tinyint(1) DEFAULT '0',
-    `shop_id` integer(10) DEFAULT NULL,
     `verified` tinyint(1) DEFAULT '0',
     `NID` varchar(255) DEFAULT NULL,
     `shop_logo` varchar(255) DEFAULT NULL,
@@ -34,7 +33,7 @@ CREATE TABLE `Product` (
     `post_type` tinyint(1) DEFAULT NULL,
     `buy_price` int DEFAULT NULL,
     `bid_starting_price` int DEFAULT NULL,
-    `bid_end_time` timestamp DEFAULT NULL,
+    `bid_end_time` int DEFAULT NULL,
     PRIMARY KEY (`product_id`)
 );
 

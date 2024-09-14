@@ -28,8 +28,9 @@ router.post("/login", (req, res) => {
       req.session.name = r[0].firstName;
       req.session.userId = r[0].user_id;
       req.session.vendor = r[0].vendor;
-      req.session.shopId = r[0].shop_id;
+      req.session.shopName = r[0].shop_name;
       req.session.userPhoto = r[0].photo;
+      req.session.shopLogo = r[0].shop_logo;
       console.log(req.session.email);
       return res.json({ loggedIn: true });
     } else {

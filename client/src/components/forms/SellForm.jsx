@@ -87,12 +87,12 @@ export default function SellForm() {
           onChange={handleInput}
           placeholder="bid_starting_price"
         />
-        <label htmlFor="bid_end_time">bid_end_time</label>
+        <label htmlFor="bid_end_time">BID FOR</label>
         <input
-          type="text"
+          type="number"
           name="bid_end_time"
           onChange={handleInput}
-          placeholder="DD-MM-YYYY"
+          placeholder="Hours"
         />
         <br />
         <hr className="text-green-1" />
