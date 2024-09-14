@@ -14,6 +14,8 @@ export const RegistrationForm = () => {
     phone: "",
     vendor: false,
     NID: 0,
+    shop_name: "",
+    shop_logo: "",
   });
   const handleInput = (e) => {
     setLogin((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -96,6 +98,22 @@ export const RegistrationForm = () => {
           name="NID"
           onChange={handleInput}
           placeholder="NID"
+        />
+        <hr />
+        <p>Shop Details</p>
+        <label htmlFor="shop_name">Shop name</label>
+        <input
+          type="text"
+          name="shop_name"
+          onChange={handleInput}
+          placeholder="Shop name"
+        />
+        <label htmlFor="shop_logo">Shop Logo</label>
+        <input
+          type="text"
+          name="shop_logo"
+          onChange={handleInput}
+          placeholder="Shop Logo"
         />
         <button type="submit">Register</button>
       </form>

@@ -35,7 +35,11 @@ export default function SellForm() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-2 mx-8 my-8 border-2 border-green-1 p-4"
+      >
+        <h1 className="text-3xl text-green-2 text-center">POST A PRODUCT</h1>
         <p>What type of post?</p>
         <select
           value={content.post_type}
@@ -74,7 +78,8 @@ export default function SellForm() {
           <option value="Phone">Phone</option>
         </select>
         <br />
-        <p>BID OPTIONS</p>
+        <hr className="text-green-1" />
+        <p className="text-center text-green-1">BID OPTIONS</p>
         <label htmlFor="bid_starting_price">bid_starting_price</label>
         <input
           type="number"
@@ -90,7 +95,8 @@ export default function SellForm() {
           placeholder="DD-MM-YYYY"
         />
         <br />
-        <p>SELL OPTIONS</p>
+        <hr className="text-green-1" />
+        <p className="text-center text-green-1">SELL OPTIONS</p>
         <label htmlFor="buy_price">Sell Price</label>
         <input
           type="number"
@@ -98,7 +104,12 @@ export default function SellForm() {
           onChange={handleInput}
           placeholder="Price in BDT"
         />
-        <button type="submit">Submit</button>
+        <button
+          className="bg-green-1 py-2 my-2 text-[#fff] font-semibold text-lg"
+          type="submit"
+        >
+          Submit
+        </button>
       </form>
     </div>
   );

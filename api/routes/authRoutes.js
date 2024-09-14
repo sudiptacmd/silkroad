@@ -41,6 +41,7 @@ router.post("/login", (req, res) => {
 
 //SIGN-UP[POST]
 router.post("/signup", (req, res) => {
+  const global_shop_id = 0;
   const reg = req.body;
   const sql =
     "INSERT INTO User (`email`, `password`, `firstName`, `lastName`, `photo`, `address`, `phone`, `NID`, `vendor`) VALUES (?,?,?,?,?,?,?,?,?)";
@@ -55,11 +56,15 @@ router.post("/signup", (req, res) => {
     reg.NID,
     reg.vendor === "1" ? 1 : 0,
   ];
+
   console.log(values);
   db.query(sql, values, (e, r) => {
     if (e) return r.json({ message: e.message });
     return res.json(r);
   });
+  if (reg.vendor === "1") {
+    //create shop and reference to it
+  }
 });
 
 export default router;
