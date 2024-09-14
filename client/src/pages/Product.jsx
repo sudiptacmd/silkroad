@@ -63,9 +63,7 @@ export default function Product() {
       </div>
       <Review />
 
-      <div>
-        <h1>pr1</h1>
-      </div>
+    
     </div>
 
   );
