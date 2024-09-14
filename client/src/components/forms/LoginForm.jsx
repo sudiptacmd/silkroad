@@ -11,6 +11,7 @@ export const LoginForm = () => {
   const handleInput = (e) => {
     setLogin((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
+  axios.defaults.withCredentials = true;
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
