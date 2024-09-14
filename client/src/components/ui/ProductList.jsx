@@ -20,37 +20,72 @@ export default function ProductList() {
     posted_at: "2022-01-01 00:00:00.000000",
   };
   return (
-    <div className=" my-2 border-2 border-green-1 flex justify-between items-center p-2">
-      <img src={Product.photo} alt="" className="w-[100px] h-[100px]" />
-      <div>
-        <h2>{Product.name}</h2>
-        <p>Seller : {Product.by}</p>
-        <p>Category : {Product.category}</p>
-        {Product.postType === "bid" ? (
-          <>
-            <p>Highest Bid : {Product.bid_current_price}</p>
-            <p>Time Left :</p>
-          </>
-        ) : (
-          <p></p>
-        )}
+    <div>
+      <div className=" my-2 border-2 border-green-1 flex justify-between items-center p-2">
+        <img src={Product.photo} alt="" className="w-[100px] h-[100px]" />
+        <div>
+          <h2>{Product.name}</h2>
+          <p>Seller : {Product.by}</p>
+          <p>Category : {Product.category}</p>
+          {Product.postType === "bid" ? (
+            <>
+              <p>Highest Bid : {Product.bid_current_price}</p>
+              <p>Time Left :</p>
+            </>
+          ) : (
+            <p></p>
+          )}
+        </div>
+        <div>
+          {Product.postType === "bid" ? (
+            <div className="flex flex-col gap-1">
+              <input className="border-2 border-green-1" type="text" />
+              <button className="text-white bg-green-2"> BID </button>
+              <button className="text-white bg-green-1"> DETAILS </button>
+            </div>
+          ) : (
+            <div className="flex flex-col gap-1">
+              <h2 className="text-green-1 text-2xl font-bold">
+                BDT {Product.buy_price}
+              </h2>
+              <button className="text-white bg-green-2"> BUY </button>
+              <button className="text-white bg-green-1"> DETAILS </button>
+            </div>
+          )}
+        </div>
       </div>
       <div>
-        {Product.postType === "bid" ? (
-          <div className="flex flex-col gap-1">
-            <input className="border-2 border-green-1" type="text" />
-            <button className="text-white bg-green-2"> BID </button>
-            <button className="text-white bg-green-1"> DETAILS </button>
-          </div>
-        ) : (
-          <div className="flex flex-col gap-1">
-            <h2 className="text-green-1 text-2xl font-bold">
-              BDT {Product.buy_price}
-            </h2>
-            <button className="text-white bg-green-2"> BUY </button>
-            <button className="text-white bg-green-1"> DETAILS </button>
-          </div>
-        )}
+        <h1>p1</h1>
+        <div className="product-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Seller</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {products.map(product => (
+                <tr key={product.productId}>
+                  <td>
+                    <img src={product.photo} alt={product.name} className="product-image" />
+                    <span>{product.name}</span>
+                  </td>
+                  <td>{product.by}</td>
+                  <td>{product.category}</td>
+                  <td>{product.buy_price}</td>
+                  <td>
+                    <button className="buy-btn">BUY</button>
+                    <button className="details-btn">DETAILS</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
