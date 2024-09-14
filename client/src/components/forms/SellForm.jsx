@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 export default function SellForm() {
   const [content, setContent] = useState({
-    name: "",
+    product_name: "",
     user_id: 0,
     photo: "",
     description: "",
@@ -45,10 +45,10 @@ export default function SellForm() {
           <option value={0}>Sell</option>
           <option value={1}>Auction</option>
         </select>
-        <label htmlFor="name">Name of Product</label>
+        <label htmlFor="product_name">Name of Product</label>
         <input
           type="text"
-          name="content.post_typename"
+          name="product_name"
           onChange={handleInput}
           placeholder="Name of Product"
         />
