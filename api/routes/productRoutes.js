@@ -8,11 +8,12 @@ const router = express.Router();
 router.post("/new", (req, res) => {
   const product = req.body;
   if (1 || req.session.vendor === 1) {
+    console.log(product);
     const sql =
       "INSERT INTO Product (`name`,`user_id`,`photo`,`description`,`category`,`post_type`,`buy_price`,`bid_starting_price`,`bid_end_time`) VALUES (?,?,?,?,?,?,?,?,?)";
     const values = [
       product.product_name,
-      req.session.userId,
+      req.session.userId || product.user_id,
       product.photo,
       product.description,
       product.category,
@@ -22,7 +23,7 @@ router.post("/new", (req, res) => {
       product.bid_end_time,
     ];
     db.query(sql, values, (e, r) => {
-      if (e) return res.json({ message: e.message });
+      //if (e) return res.json({ message: e.message });
       return res.json(r);
     });
   } else {

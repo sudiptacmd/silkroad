@@ -17,7 +17,7 @@ export default function SellForm() {
   const handleInput = (e) => {
     setContent((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
-
+  axios.defaults.withCredentials = true;
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
