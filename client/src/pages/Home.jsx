@@ -10,11 +10,12 @@ export default function Home() {
     photo: "",
     shop_id: 0,
   });
+  const [products, setProducts] = useState([]);
   useEffect(() => {
     axios
       .get("http://localhost:5100/product/")
-      .then((r) => {
-        console.log(r.data);
+      .then((response) => {
+        setProducts(response.data);
       })
       .catch((err) => console.log(err));
     axios
@@ -34,15 +35,9 @@ export default function Home() {
   }, []);
   return (
     <div>
-      <select name="type" id="">
-        <option value="buy">SELL POSTS</option>
-        <option value="bid">AUCTIONS</option>
-      </select>
-      <ProductList />
-      <p>
-        {info.name}
-        {info.vendor}
-      </p>
+      {products.map((product) => (
+        <ProductList key={product.product_id} product={product} />
+      ))}
     </div>
   );
 }
