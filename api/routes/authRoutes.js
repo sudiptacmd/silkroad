@@ -43,8 +43,9 @@ router.post("/login", (req, res) => {
 //SIGN-UP[POST]
 router.post("/signup", (req, res) => {
   const reg = req.body;
+  
   const sql =
-    "INSERT INTO User (`email`, `password`, `firstName`, `lastName`, `photo`, `address`, `phone`, `NID`, `vendor`, `shop_name`, `shop_logo`) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+    "INSERT INTO User (email, password, firstName, lastName, photo, address, phone, NID, vendor, shop_name, shop_logo) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
   const values = [
     reg.email,
     reg.password,
@@ -59,11 +60,35 @@ router.post("/signup", (req, res) => {
     reg.shop_logo,
   ];
 
-  console.log(values);
   db.query(sql, values, (e, r) => {
-    if (e) return r.json({ message: e.message });
-    return res.json(r);
+    
+    if (e) return res.json({ message: e.message });
+    
+    // Get the user_id of the newly created user
+    // CODE HERE
+    
+    const sql2 = "SELECT user_id FROM user WHERE email = ? AND password = ?";
+    db.query(sql2, [reg.email, reg.password], (e, r) =>{
+      if (e) return res.json({ message: e.message });
+      
+      
+      console.log(r[0].user_id);
+      const cartSql = "INSERT INTO Cart (`user_id`) VALUES (?)";
+      const cartValues = [r[0].user_id];
+      console.log(cartValues);
+      db.query(cartSql, cartValues, (e, r) => {
+        if (e){ 
+          console.log(e);
+          return res.json({ message: e.message })
+        }
+        return res.json(r);
+      });
+      
+    });
+
+    // Insert a new row into the Cart table
   });
 });
 
-export default router;
+
+  export default router;
