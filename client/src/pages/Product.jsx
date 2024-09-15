@@ -6,6 +6,22 @@ import axios from "axios";
 export default function Product() {
   const [product, setProduct] = useState({});
   const productId = window.location.pathname.split("/").pop();
+  const handleCart = async (e) => {
+    e.preventDefault();
+    try {
+      await axios
+        .post("http://localhost:5100/buy", {
+          product_id: productId,
+          quantity: 1,
+        })
+        .then((r) => {
+          navigate("/cart");
+        })
+        .catch((e) => console.log(e));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     axios
@@ -30,7 +46,7 @@ export default function Product() {
           {!product.postType ? (
             <>
               <h2>BDT {product.buy_price}</h2>
-              <button>ADD TO CART</button>
+              <button onClick={handleCart}>ADD TO CART</button>
             </>
           ) : (
             <>
