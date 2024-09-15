@@ -62,6 +62,9 @@ export default function Product() {
         <p>{product.description}</p>
       </div>
       <Review />
+
+    
     </div>
+
   );
 }
