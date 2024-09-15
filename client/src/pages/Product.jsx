@@ -10,7 +10,7 @@ export default function Product() {
     e.preventDefault();
     try {
       await axios
-        .post("http://localhost:5100/buy", {
+        .post("http://localhost:5100/buy/buy", {
           product_id: productId,
           quantity: 1,
         })
