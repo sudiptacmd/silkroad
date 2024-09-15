@@ -4,6 +4,7 @@ import "./showProducts.css";
 
 export default function ProductList(props) {
   const { product } = props;
+  // GET BID INFO
   const [bidInfo, setBidInfo] = useState({
     current_bid: 10,
   });
@@ -28,12 +29,14 @@ export default function ProductList(props) {
           {product.post_type ? <p>Auction</p> : <p>Rating here</p>}
         </div>
         {product.post_type ? (
-          <div className="ml-auto">
+          <div className="ml-auto text-center font-semibold text-lg">
             <p>Latest Bid</p>
-            <p className="text-green-1 text-3xl">BDT {bidInfo.current_bid} </p>
+            <p className="text-green-1 text-2xl font-bold">
+              BDT {bidInfo.current_bid}{" "}
+            </p>
           </div>
         ) : (
-          <div className="ml-auto text-center">
+          <div className="ml-auto text-center font-semibold text-lg">
             <p>Price </p>
             <p className="text-green-1 text-2xl font-bold">
               BDT {product.buy_price}

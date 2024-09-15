@@ -48,4 +48,22 @@ router.post("/new", (req, res) => {
   }
 });
 
+router.get("/:productId", (req, res) => {
+  const productId = req.params.productId;
+  const sql = "SELECT * FROM Product WHERE product_id = ?";
+
+  db.query(sql, [productId], (e, r) => {
+    if (e) {
+      console.error(e);
+      return res.status(500).json({ message: "Failed to retrieve product" });
+    }
+
+    if (r.length > 0) {
+      return res.json(r[0]);
+    } else {
+      return res.status(404).json({ message: "Product not found" });
+    }
+  });
+});
+
 export default router;

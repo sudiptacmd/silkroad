@@ -1,55 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import QnA from "../components/ui/QnA";
+import Review from "../components/ui/Review";
 import axios from "axios";
-import { useParams } from "react-router-dom";
 
 export default function Product() {
-  const { id } = useParams();
-  console.log(id);
-  const [product, setProduct] = useState({
-    productId: id,
-    name: "",
-    by: "",
-    photo: "",
-    description: "",
-    rating: 0,
-    category: "",
-    postType: 0,
-    buy_price: 0,
-    bid_starting_price: 0,
-    bid_current_price: 0,
-    bid_end_time: 0,
-    latest_bid: 102111,
-  });
+  const [product, setProduct] = useState({});
+  const productId = window.location.pathname.split("/").pop();
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5100/product/${id}`)
-      .then((r) => {
-        console.log(r.data);
-        setProduct(r.data);
+      .get(`http://localhost:5100/product/${productId}`)
+      .then((response) => {
+        setProduct(response.data);
       })
-      .catch((e) => console.log(e));
-  }, []);
+      .catch((error) => console.error(error));
+  }, [productId]);
+
   return (
     <div>
       <img src={product.photo} alt="" />
       <div className="flex justify-between items-center">
         <div>
           <h2>{product.name}</h2>
-          <p>Seller : {product.by}</p>
+          <p>Seller : {product.user_id}</p>
           <p>Category : {product.category}</p>
-          <p>Rating : {product.rating}</p>
+          <p>Rating : Kam kore na bal</p>
         </div>
         <div className="flex flex-col text-center">
-          {product.postType === "sell" ? (
+          {!product.postType ? (
             <>
               <h2>BDT {product.buy_price}</h2>
               <button>ADD TO CART</button>
             </>
           ) : (
             <>
-              <h2>Latest Bid : BDT {product.bid_current_price}</h2>
+              <h2>Latest Bid : BDT !!ETAO KAM KORE NA!!</h2>
               <input type="text" name="" id="" />
               <button>BID NOW</button>
             </>
@@ -62,9 +47,6 @@ export default function Product() {
         <p>{product.description}</p>
       </div>
       <Review />
-
-    
     </div>
-
   );
 }
