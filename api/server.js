@@ -7,6 +7,7 @@ import bodyParser from "body-parser";
 import authRoutes from "./routes/authRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import buyRoutes from "./routes/buyRoutes.js";
+import bidRoutes from "./routes/bidRoutes.js";
 
 const app = express();
 app.use(
@@ -35,6 +36,7 @@ app.use(
 app.use("/auth", authRoutes);
 app.use("/product", productRoutes); //EVAN
 app.use("/buy", buyRoutes);
+app.use("/bid", bidRoutes);
 
 app.listen(5100, () => {
   console.log("SERVER RUNNING 5100");
