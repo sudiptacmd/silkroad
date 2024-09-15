@@ -12,6 +12,12 @@ export default function Home() {
   });
   useEffect(() => {
     axios
+      .get("http://localhost:5100/product/")
+      .then((r) => {
+        console.log(r.data);
+      })
+      .catch((err) => console.log(err));
+    axios
       .get("http://localhost:5100/auth/")
       .then((r) => {
         if (r.data.valid) {

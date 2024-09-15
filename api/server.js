@@ -6,7 +6,7 @@ import bodyParser from "body-parser";
 
 import authRoutes from "./routes/authRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
-import showProductRoutes from "./routes/showProductRoutes.js"
+import showProductRoutes from "./routes/showProductRoutes.js";
 
 const app = express();
 app.use(
@@ -34,7 +34,7 @@ app.use(
 // ROUTES : "/route" indicates the HTTP URI, the latter indicates what to do at this route.
 app.use("/auth", authRoutes);
 app.use("/product", productRoutes); //EVAN
-app.use("/productList", showProductRoutes); //SAIF
+app.use("/show", showProductRoutes); //SAIF
 
 app.listen(5100, () => {
   console.log("SERVER RUNNING 5100");

@@ -4,6 +4,20 @@ import db from "../db.js";
 
 const router = express.Router();
 
+router.get("/", (req, res) => {
+  const sql = "SELECT * FROM product";
+  console.log("REQUEST RECIEVED");
+
+  db.query(sql, (e, r) => {
+    if (e) {
+      console.error(e);
+      return res.status(500).json({ message: "Failed to retrieve products" });
+    }
+    console.log(r);
+    return res.json(r);
+  });
+});
+
 //POST HOY NA
 router.post("/new", (req, res) => {
   const product = req.body;
@@ -33,9 +47,5 @@ router.post("/new", (req, res) => {
     return res.json({ success: false, message: "Not authorized to post" });
   }
 });
-
-
-
-
 
 export default router;
