@@ -27,17 +27,9 @@ export default function Cart() {
   ]);
   useEffect(() => {
     axios
-      .get("http://localhost:5100/idk")
+      .get("http://localhost:5100/ong/fetchcart")
       .then((r) => {
-        if (r.data.valid) {
-          setInfo({
-            name: r.data.userName,
-            id: r.data.userId,
-            vendor: r.data.vendor,
-            shop_id: r.data.shopId,
-            photo: r.data.userPhoto,
-          });
-        }
+        // cart theke jinish dite hobe
       })
       .catch((err) => console.log(err));
   });
@@ -50,7 +42,7 @@ export default function Cart() {
       {cart.map((product) => (
         <ProductSmall key={product.product_id} product={product} type="cart" />
       ))}
-      <button onClick={handleChekout}>Checkout</button>
+      <button onClick={handleCheckout}>Checkout</button>
     </div>
   );
 }
