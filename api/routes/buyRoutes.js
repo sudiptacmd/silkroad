@@ -5,7 +5,10 @@ import db from "../db.js";
 const router = express.Router();
 
 router.post("/buy", (req, res) => {
-  const { productId, quantity } = req.body;
+  const productId = req.body.product_id;
+  const quant = req.body.quantity;
+
+  console.log(quant);
   console.log(productId);
   // Check if a cart exists for the user
   const checkCart =
@@ -61,15 +64,11 @@ router.post("/buy", (req, res) => {
         // Product doesn't exist in the cart, insert a new record
         const insertCartItem =
           "INSERT INTO Cart_item (cart_id, prod_id, quantity) VALUES (?, ?, ?)";
-        db.query(
-          insertCartItem,
-          [cartId, productId, quantity],
-          (err, result) => {
-            if (err) {
-              return res.json({ success: false, message: err.message });
-            }
+        db.query(insertCartItem, [cartId, productId, quant], (err, result) => {
+          if (err) {
+            return res.json({ success: false, message: err.message });
           }
-        );
+        });
       }
       // Redirect to the cart page upon successful update
       res.redirect("/cart");
