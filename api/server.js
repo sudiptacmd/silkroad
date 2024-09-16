@@ -9,6 +9,7 @@ import productRoutes from "./routes/productRoutes.js";
 import buyRoutes from "./routes/buyRoutes.js";
 import bidRoutes from "./routes/bidRoutes.js";
 import searchRoutes from "./routes/searchRoutes.js";
+import viewShopRoutes from "./routes/viewShopRoutes.js";
 
 const app = express();
 app.use(
@@ -39,6 +40,7 @@ app.use("/product", productRoutes); //EVAN
 app.use("/buy", buyRoutes);
 app.use("/bid", bidRoutes);
 app.use("/search", searchRoutes);
+app.use("/shop", viewShopRoutes);
 
 app.listen(5100, () => {
   console.log("SERVER RUNNING 5100");
