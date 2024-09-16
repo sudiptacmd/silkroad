@@ -8,8 +8,11 @@ import authRoutes from "./routes/authRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import buyRoutes from "./routes/buyRoutes.js";
 import bidRoutes from "./routes/bidRoutes.js";
+import payRoutes from "./routes/payRoutes.js";
+import ongRoutes from "./routes/ongRoutes.js";
 import searchRoutes from "./routes/searchRoutes.js";
 import reviewRoutes from "./routes/reviewRoutes.js";
+
 
 const app = express();
 app.use(
@@ -39,8 +42,11 @@ app.use("/auth", authRoutes);
 app.use("/product", productRoutes);
 app.use("/buy", buyRoutes);
 app.use("/bid", bidRoutes);
+app.use("/pay", payRoutes);
+app.use("/ong", ongRoutes);
 app.use("/search", searchRoutes);
 app.use("/review", reviewRoutes);
+
 
 app.listen(5100, () => {
   console.log("SERVER RUNNING 5100");
