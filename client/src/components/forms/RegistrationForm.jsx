@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const RegistrationForm = () => {
   const navigate = useNavigate();
@@ -35,8 +35,12 @@ export const RegistrationForm = () => {
     }
   };
   return (
-    <div>
-      <h1>Registration</h1>
+    <div className="w-96 mx-auto">
+      <h1 className="text-3xl text-center text-green-1 my-4">Registration</h1>
+
+      <Link to="/login">
+        <p className="text-center my-2">Click Here to Login</p>
+      </Link>
       <form onSubmit={handleSubmit} className="flex flex-col gap-2 py-4">
         <p>Sign Up as a</p>
         <select id="" name="vendor" onChange={handleInput}>

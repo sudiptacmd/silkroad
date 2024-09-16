@@ -27,7 +27,7 @@ export default function Cart() {
   ]);
   useEffect(() => {
     axios
-      .get("http://localhost:5100/auth/")
+      .get("http://localhost:5100/idk")
       .then((r) => {
         if (r.data.valid) {
           setInfo({
