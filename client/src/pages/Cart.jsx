@@ -1,8 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import ProductSmall from "../components/ui/ProductSmall";
+import ProductSmall from "../components/ui/CartProducts";
 
 export default function Cart() {
+  const handleCheckout = () => {};
   const [info, setInfo] = useState({
     name: "",
     id: 0,
@@ -26,7 +27,7 @@ export default function Cart() {
   ]);
   useEffect(() => {
     axios
-      .get("http://localhost:5100/auth/")
+      .get("http://localhost:5100/idk")
       .then((r) => {
         if (r.data.valid) {
           setInfo({
@@ -49,6 +50,7 @@ export default function Cart() {
       {cart.map((product) => (
         <ProductSmall key={product.product_id} product={product} type="cart" />
       ))}
+      <button onClick={handleChekout}>Checkout</button>
     </div>
   );
 }
