@@ -9,6 +9,7 @@ import productRoutes from "./routes/productRoutes.js";
 import buyRoutes from "./routes/buyRoutes.js";
 import bidRoutes from "./routes/bidRoutes.js";
 import searchRoutes from "./routes/searchRoutes.js";
+import reviewRoutes from "./routes/reviewRoutes.js";
 
 const app = express();
 app.use(
@@ -35,10 +36,11 @@ app.use(
 
 // ROUTES : "/route" indicates the HTTP URI, the latter indicates what to do at this route.
 app.use("/auth", authRoutes);
-app.use("/product", productRoutes); //EVAN
+app.use("/product", productRoutes);
 app.use("/buy", buyRoutes);
 app.use("/bid", bidRoutes);
 app.use("/search", searchRoutes);
+app.use("/review", reviewRoutes);
 
 app.listen(5100, () => {
   console.log("SERVER RUNNING 5100");
