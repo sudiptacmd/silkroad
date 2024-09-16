@@ -8,6 +8,8 @@ import authRoutes from "./routes/authRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import buyRoutes from "./routes/buyRoutes.js";
 import bidRoutes from "./routes/bidRoutes.js";
+import payRoutes from "./routes/payRoutes.js";
+import ongRoutes from "./routes/ongRoutes.js";
 
 const app = express();
 app.use(
@@ -37,6 +39,8 @@ app.use("/auth", authRoutes);
 app.use("/product", productRoutes); //EVAN
 app.use("/buy", buyRoutes);
 app.use("/bid", bidRoutes);
+app.use("/pay", payRoutes);
+app.use("/ong", ongRoutes);
 
 app.listen(5100, () => {
   console.log("SERVER RUNNING 5100");
