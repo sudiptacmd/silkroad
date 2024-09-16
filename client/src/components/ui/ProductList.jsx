@@ -23,7 +23,7 @@ export default function ProductList(props) {
         </div>
         <div>
           <p>{product.name}</p>
-          <p>Seller : {product.user_id}</p>
+          <p>Seller : {product.shop_name}</p>
           <p>Category : {product.category}</p>
           {product.post_type ? <p>Auction</p> : <p>Rating here</p>}
         </div>

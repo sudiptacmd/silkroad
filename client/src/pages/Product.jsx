@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import QnA from "../components/ui/QnA";
 import Review from "../components/ui/Review";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function Product() {
   const [product, setProduct] = useState({});
@@ -38,7 +38,10 @@ export default function Product() {
       <div className="flex justify-between items-center">
         <div>
           <h2>{product.name}</h2>
-          <p>Seller : {product.user_id}</p>
+          <Link to={`/shop/${product.user_id}`}>
+            <p>Seller : {product.shop_name}</p>
+          </Link>
+
           <p>Category : {product.category}</p>
           <p>Rating : Kam kore na bal</p>
         </div>
@@ -57,7 +60,6 @@ export default function Product() {
           )}
         </div>
       </div>
-      <QnA />
       <div>
         <h2>Description : </h2>
         <p>{product.description}</p>

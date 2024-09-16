@@ -1,5 +1,6 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import Layout from "./pages/Layout";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
@@ -9,6 +10,7 @@ import NewProduct from "./pages/NewProduct";
 import Product from "./pages/Product";
 import Register from "./pages/Register";
 import Shop from "./pages/Shop";
+import Search from "./pages/Search";
 import "./index.css";
 
 export default function App() {
@@ -21,9 +23,11 @@ export default function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/shop" element={<Shop />} />
+          <Route path="/shop/:id" element={<Shop />} />
           <Route path="/product/:id" element={<Product />} />
           <Route path="/new-product" element={<NewProduct />} />
+          <Route path="/search-results" element={<Search />} />
+          
         </Route>
       </Routes>
     </BrowserRouter>

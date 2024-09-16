@@ -7,3 +7,10 @@
 body {
   font-family: "Poppins", sans-serif;
 }
+
+input,
+textarea {
+  outline: none;
+  padding: 4px;
+  border: 2px solid #22cc9d;
+}
