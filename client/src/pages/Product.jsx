@@ -38,7 +38,7 @@ export default function Product() {
       <div className="flex justify-between items-center">
         <div>
           <h2>{product.name}</h2>
-          <p>Seller : {product.user_id}</p>
+          <p>Seller : {product.shop_name}</p>
           <p>Category : {product.category}</p>
           <p>Rating : Kam kore na bal</p>
         </div>

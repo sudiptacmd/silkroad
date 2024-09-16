@@ -5,7 +5,7 @@ import db from "../db.js";
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  const sql = "SELECT * FROM product";
+  const sql = "SELECT product.*, user.shop_name FROM user, product WHERE user.user_id = product.user_id;";
   console.log("REQUEST RECIEVED");
 
   db.query(sql, (e, r) => {
@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
       console.error(e);
       return res.status(500).json({ message: "Failed to retrieve products" });
     }
-    console.log(r);
+    
     return res.json(r);
   });
 });
@@ -22,7 +22,7 @@ router.get("/", (req, res) => {
 router.post("/new", (req, res) => {
   const product = req.body;
   if (req.session.vendor === 1) {
-    console.log(product);
+    
     const sql =
       "INSERT INTO Product (`name`,`user_id`,`photo`,`description`,`category`,`post_type`,`buy_price`,`bid_starting_price`,`bid_end_time`) VALUES (?,?,?,?,?,?,?,?,?)";
     const values = [
@@ -50,7 +50,7 @@ router.post("/new", (req, res) => {
 
 router.get("/:productId", (req, res) => {
   const productId = req.params.productId;
-  const sql = "SELECT * FROM Product WHERE product_id = ?";
+  const sql = "SELECT product.*, user.shop_name FROM user, product WHERE user.user_id = product.user_id AND product_id = ?";
 
   db.query(sql, [productId], (e, r) => {
     if (e) {
