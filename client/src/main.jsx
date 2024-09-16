@@ -11,6 +11,8 @@ import Product from "./pages/Product";
 import Register from "./pages/Register";
 import Shop from "./pages/Shop";
 import Search from "./pages/Search";
+
+
 import "./index.css";
 
 export default function App() {
@@ -27,6 +29,7 @@ export default function App() {
           <Route path="/product/:id" element={<Product />} />
           <Route path="/new-product" element={<NewProduct />} />
           <Route path="/search-results" element={<Search />} />
+          
           
         </Route>
       </Routes>

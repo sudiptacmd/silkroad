@@ -11,7 +11,9 @@ import bidRoutes from "./routes/bidRoutes.js";
 import payRoutes from "./routes/payRoutes.js";
 import ongRoutes from "./routes/ongRoutes.js";
 import searchRoutes from "./routes/searchRoutes.js";
+import viewShopRoutes from "./routes/viewShopRoutes.js";
 import reviewRoutes from "./routes/reviewRoutes.js";
+
 
 
 const app = express();
@@ -45,7 +47,9 @@ app.use("/bid", bidRoutes);
 app.use("/pay", payRoutes);
 app.use("/ong", ongRoutes);
 app.use("/search", searchRoutes);
+app.use("/shop", viewShopRoutes);
 app.use("/review", reviewRoutes);
+
 
 
 app.listen(5100, () => {
