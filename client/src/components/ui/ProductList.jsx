@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./showProducts.css";
 
 export default function ProductList(props) {
   const { product } = props;
