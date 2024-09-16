@@ -66,25 +66,26 @@ router.post("/signup", (req, res) => {
     
     // Get the user_id of the newly created user
     // CODE HERE
-    
-    const sql2 = "SELECT user_id FROM user WHERE email = ? AND password = ?";
-    db.query(sql2, [reg.email, reg.password], (e, r) =>{
-      if (e) return res.json({ message: e.message });
-      
-      
-      console.log(r[0].user_id);
-      const cartSql = "INSERT INTO Cart (`user_id`) VALUES (?)";
-      const cartValues = [r[0].user_id];
-      console.log(cartValues);
-      db.query(cartSql, cartValues, (e, r) => {
-        if (e){ 
-          console.log(e);
-          return res.json({ message: e.message })
-        }
-        return res.json(r);
+    if (reg.vendor === 0) {
+      const sql2 = "SELECT user_id FROM user WHERE email = ? AND password = ?";
+      db.query(sql2, [reg.email, reg.password], (e, r) =>{
+        if (e) return res.json({ message: e.message });
+        
+        
+        
+        const cartSql = "INSERT INTO Cart (`user_id`) VALUES (?)";
+        const cartValues = [r[0].user_id];
+        
+        db.query(cartSql, cartValues, (e, r) => {
+          if (e){ 
+            console.log(e);
+            return res.json({ message: e.message })
+          }
+          return res.json(r);
+        });
+        
       });
-      
-    });
+    };
 
     // Insert a new row into the Cart table
   });

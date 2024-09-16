@@ -37,7 +37,7 @@ export const RegistrationForm = () => {
   return (
     <div>
       <h1>Registration</h1>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-2 py-4">
+      <form onSubmit= {handleSubmit} action='' className="flex flex-col gap-2 py-4">
         <p>Sign Up as a</p>
         <select id="" name="vendor" onChange={handleInput}>
           <option value={0}>Buyer</option>
