@@ -44,6 +44,9 @@ router.post("/login", (req, res) => {
 router.post("/signup", (req, res) => {
   const reg = req.body;
   
+  console.log(reg);
+
+
   const sql =
     "INSERT INTO User (email, password, firstName, lastName, photo, address, phone, NID, vendor, shop_name, shop_logo) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
   const values = [
@@ -62,11 +65,16 @@ router.post("/signup", (req, res) => {
 
   db.query(sql, values, (e, r) => {
     
-    if (e) return res.json({ message: e.message });
+    if (e) {
+      console.log(e);
+      return res.json({ message: e.message });
+    }
     
     // Get the user_id of the newly created user
     // CODE HERE
-    if (reg.vendor === 0) {
+    
+    // Create a new cart for the user
+    if (!reg.vendor) {
       const sql2 = "SELECT user_id FROM user WHERE email = ? AND password = ?";
       db.query(sql2, [reg.email, reg.password], (e, r) =>{
         if (e) return res.json({ message: e.message });
@@ -79,13 +87,16 @@ router.post("/signup", (req, res) => {
         db.query(cartSql, cartValues, (e, r) => {
           if (e){ 
             console.log(e);
-            return res.json({ message: e.message })
+            return res.json({ message: e.message });
           }
-          return res.json(r);
+          
         });
         
       });
     };
+    console.log(r);
+    return res.json(r);
+
 
     // Insert a new row into the Cart table
   });

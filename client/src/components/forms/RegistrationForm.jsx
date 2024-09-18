@@ -26,7 +26,7 @@ export const RegistrationForm = () => {
       await axios
         .post("http://localhost:5100/auth/signup", login)
         .then((r) => {
-          console.log(r);
+          // console.log(r);
           navigate("/login");
         })
         .catch((e) => console.log(e));

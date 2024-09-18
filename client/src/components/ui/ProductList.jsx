@@ -12,7 +12,7 @@ export default function ProductList(props) {
     <Link to={"/product/" + product.product_id}>
       <div
         key={product.product_id}
-        className="flex flex-row items-center my-2 border-2 border-green-1 p-2"
+        className="flex flex-row items-center my-2 border-2 border-green-1 p-2 rounded-lg hover:shadow-2xl"
       >
         <div>
           <img
