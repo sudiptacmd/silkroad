@@ -11,8 +11,8 @@ export default function Product() {
   const [maxBid, setMaxBid] = useState(0);
 
   const [bid, setBid] = useState({
-    "product_id": productId,
-    "amount": 0,
+    product_id: productId,
+    amount: 0,
   });
 
   const handleBidInput = (e) => {
@@ -27,7 +27,6 @@ export default function Product() {
         .then((r) => {
           console.log(r);
           alert(r.data.message, "success");
-          
         })
         .catch((e) => console.log(e));
     } catch (error) {
@@ -63,18 +62,10 @@ export default function Product() {
     axios
       .get(`http://localhost:5100/bid/${productId}`)
       .then((response) => {
-
         if (response.data.max) setMaxBid(response.data.max);
-
-
       })
       .catch((error) => console.error(error));
   }, [productId]);
-
-
-
-
-
 
   return (
     <div className="mb-10">
@@ -83,7 +74,9 @@ export default function Product() {
         <div>
           <h2 className="text-3xl fontweight-bold mb-5">{product.name}</h2>
           <Link to={`/shop/${product.user_id}`}>
-            <p className="text-2xl mb-5">Seller : <span className="text-green-1">{product.shop_name}</span></p>
+            <p className="text-2xl mb-5">
+              Seller : <span className="text-green-1">{product.shop_name}</span>
+            </p>
           </Link>
 
           <p>Category : {product.category}</p>
@@ -97,8 +90,12 @@ export default function Product() {
             </>
           ) : (
             <>
-              <h2 className="text-2xl flex justify-center ">Latest Bid :
-                < p className="text-green-1"> BDT {maxBid ? maxBid : (product.bid_starting_price)} </p>
+              <h2 className="text-2xl flex justify-center ">
+                Latest Bid :
+                <p className="text-green-1">
+                  {" "}
+                  BDT {maxBid ? maxBid : product.bid_starting_price}{" "}
+                </p>
               </h2>
               <input
                 onChange={handleBidInput}
@@ -109,7 +106,6 @@ export default function Product() {
                 placeholder="Enter Amount"
               />
               <div className="flex justify-center items-center">
-
                 <button
                   onClick={handleBid}
                   className="bg-green-1 text-white p-2 rounded-md"
@@ -123,9 +119,11 @@ export default function Product() {
       </div>
       <div>
         <h2>Description : </h2>
-        <p className="text-justify border-2 p-3 rounded-md">{product.description}</p>
+        <p className="text-justify border-2 p-3 rounded-md">
+          {product.description}
+        </p>
       </div>
-      <Review />
+      <Review productId={productId} />
     </div>
   );
 }
