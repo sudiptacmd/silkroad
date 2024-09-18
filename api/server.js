@@ -13,8 +13,7 @@ import ongRoutes from "./routes/ongRoutes.js";
 import searchRoutes from "./routes/searchRoutes.js";
 import viewShopRoutes from "./routes/viewShopRoutes.js";
 import reviewRoutes from "./routes/reviewRoutes.js";
-
-
+import adminRoutes from "./routes/adminRoutes.js";
 
 const app = express();
 app.use(
@@ -49,8 +48,7 @@ app.use("/ong", ongRoutes);
 app.use("/search", searchRoutes);
 app.use("/shop", viewShopRoutes);
 app.use("/review", reviewRoutes);
-
-
+app.use("/admin", adminRoutes);
 
 app.listen(5100, () => {
   console.log("SERVER RUNNING 5100");
