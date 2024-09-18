@@ -48,6 +48,33 @@ router.post("/new", (req, res) => {
   }
 });
 
+// Delete Post??
+
+router.delete("/productdelete/:productId", (req, res) => {
+  const productId = req.params.productId;
+  const userId = req.session.userId;
+
+  if (req.session.vendor !== 1) {
+    return res.status(403).json({success: false, message: "You are not authorized to delete the product./n Delete Failed!!!"});
+  }
+  const sql = "Delete from product where product_id = ? and user_id = ?";
+db.query(sql, [productId, userId], (e, r) => {
+  if (e) {
+    console.error(e);
+    return res.status(500).json ({success: false, message: "Product deletion failed!"});
+  
+  }
+
+  if (r.affectedRows > 0) {
+    return res.json({success: true, message: "Product successfully deleted!"});
+
+  } else {
+    return res.status(404).json({success: false, message: "Product not found or not authorized to delete!"})
+  }
+});
+
+});
+
 router.get("/:productId", (req, res) => {
   const productId = req.params.productId;
   const sql = "SELECT product.*, user.shop_name FROM user, product WHERE user.user_id = product.user_id AND product_id = ?";
