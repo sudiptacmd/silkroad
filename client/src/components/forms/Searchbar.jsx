@@ -11,6 +11,13 @@ export default function Searchbar() {
     setSearch((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  const handleKeyPress = (event) => {
+    if(event.key === 'Enter'){
+      handleSubmit();
+    }
+  }
+
+
   const handleSubmit = async () => {
     try {
       if (search === "") {
@@ -37,6 +44,7 @@ export default function Searchbar() {
         name="search"
         onChange={handleSearch}
         placeholder="Search..."
+        onKeyDown={handleKeyPress} 
       />
 
       <button
