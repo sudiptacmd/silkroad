@@ -2,34 +2,9 @@ import React, { useEffect, useState } from "react";
 import Searchbar from "../forms/Searchbar";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
-export default function Navbar() {
-  const location = useLocation();
-  const [currentPage, setCurrentPage] = useState(location.pathname);
-  const [info, setInfo] = useState({
-    name: "",
-    id: 0,
-    vendor: 0,
-    photo: "",
-    shop_id: 0,
-  });
+export default function Navbar(props) {
+  const { info } = props;
 
-  useEffect(() => {
-    setCurrentPage(location.pathname);
-    axios
-      .get("http://localhost:5100/auth/")
-      .then((r) => {
-        if (r.data.valid) {
-          setInfo({
-            name: r.data.userName,
-            id: r.data.userId,
-            vendor: r.data.vendor,
-            shop_id: r.data.shopName,
-            photo: r.data.userPhoto,
-          });
-        }
-      })
-      .catch((err) => console.log(err));
-  }, [[location.pathname]]);
   return (
     <div className="flex justify-between items-center">
       <Link to="/">
