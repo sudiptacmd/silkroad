@@ -36,7 +36,7 @@ export default function Home() {
   }, []);
   return (
     <div>
-      <div className="flex flex-row items-center justify-center gap-3 py-2">
+      <div className="flex flex-row items-center justify-center gap-3 py-12">
         <p>What type of posts to show you? </p>
         <select
           value={show}

@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function ProductList(props) {
   const { product } = props;
-  const rating = 0;
+  const [rating, setRating] = useState(0);
   // GET BID INFO
   const [bidInfo, setBidInfo] = useState({
     current_bid: 10,
   });
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5100/review/rating/${product.product_id}`)
+      .then((response) => {
+        setRating(response.data.avgRating);
+      });
+  }, []);
 
   return (
     <Link to={"/product/" + product.product_id}>
@@ -71,7 +79,7 @@ export default function ProductList(props) {
           </div>
         )}
         <div className="flex flex-row items-center gap-0.5 justify-center">
-          <p>3</p>
+          <p>{Math.floor(rating * 100) / 100}</p>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

@@ -44,5 +44,24 @@ router.get("/:productId", (req, res) => {
     return res.json(r);
   });
 });
+router.get("/rating/:id", (req, res) => {
+  const productId = req.params.id;
+
+  const query =
+    "SELECT AVG(rating) AS avgRating FROM Review WHERE product_id = ?";
+
+  db.query(query, [productId], (e, r) => {
+    if (e) {
+      console.log(e);
+      return res.json({ success: false, message: "Database error" });
+    }
+
+    if (r.length === 0 || r[0].avgRating === null) {
+      return res.json({ avgRating: 0 });
+    }
+
+    return res.json({ avgRating: r[0].avgRating });
+  });
+});
 
 export default router;
