@@ -1,7 +1,9 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function SellForm() {
+  const navigate = useNavigate();
   const categories = [
     "Electronics",
     "Cars",
