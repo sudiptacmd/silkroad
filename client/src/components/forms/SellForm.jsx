@@ -2,6 +2,24 @@ import axios from "axios";
 import React, { useState } from "react";
 
 export default function SellForm() {
+  const categories = [
+    "Electronics",
+    "Cars",
+    "Bikes",
+    "Computer",
+    "Phone",
+    "Fashion",
+    "Appliances",
+    "Grocery",
+    "Food",
+    "Health",
+    "Beauty",
+    "Toys",
+    "Home",
+    "Sports",
+    "Books",
+    "Others",
+  ];
   const [content, setContent] = useState({
     product_name: "",
     user_id: 0,
@@ -72,10 +90,9 @@ export default function SellForm() {
         />
         <label htmlFor="category">Category</label>
         <select id="" name="category" onChange={handleInput}>
-          <option defaultChecked value="Electronics">
-            Electronics
-          </option>
-          <option value="Phone">Phone</option>
+          {categories.map((category) => (
+            <option value={category}>{category}</option>
+          ))}
         </select>
         <br />
         <hr className="text-green-1" />

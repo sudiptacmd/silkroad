@@ -35,7 +35,10 @@ export default function Navbar() {
       <Link to="/">
         <span className="flex justify-start items-center">
           <img className="size-16" src="/logo.png" alt="" />
-          <h3>SilkRoad</h3>
+          <span className="flex flex-row text-lg md:text-2xl font-bold">
+            <h3 className="text-green-1 ">Silk</h3>
+            <h3 className="text-green-2 ">Road</h3>
+          </span>
         </span>
       </Link>
       <Searchbar />

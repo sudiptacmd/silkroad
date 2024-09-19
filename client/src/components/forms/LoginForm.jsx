@@ -35,7 +35,9 @@ export const LoginForm = () => {
   };
   return (
     <div>
-      <h1 className="text-center text-3xl font-semibold py-5">Login</h1>
+      <h1 className="text-center text-3xl font-semibold py-5 text-green-2">
+        Login
+      </h1>
       <form
         onSubmit={handleSubmit}
         className="flex flex-col gap-4 w-72 mx-auto"

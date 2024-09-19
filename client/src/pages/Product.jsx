@@ -14,7 +14,7 @@ export default function Product() {
     product_id: productId,
     amount: 0,
   });
-
+  const [quantity, setQuantity] = useState(1);
   const handleBidInput = (e) => {
     setBid((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -68,8 +68,12 @@ export default function Product() {
   }, [productId]);
 
   return (
-    <div className="mb-10">
-      <img src={product.photo} alt="" />
+    <div className="mb-10 w-full lg:w-[1000px] mx-auto">
+      <img
+        src={product.photo}
+        alt=""
+        className="w-[300px] lg:w-[600px] h-[300px] lg:h-[600px] object-contain mx-auto"
+      />
       <div className="flex justify-between items-center">
         <div>
           <h2 className="text-3xl fontweight-bold mb-5">{product.name}</h2>
@@ -85,8 +89,15 @@ export default function Product() {
         <div className="flex flex-col text-center">
           {!product.post_type ? (
             <>
-              <h2>BDT {product.buy_price}</h2>
-              <button onClick={handleCart}>ADD TO CART</button>
+              <h2 className="text-3xl text-green-1 font-bold">
+                BDT {product.buy_price}
+              </h2>
+              <button
+                onClick={handleCart}
+                className="bg-green-1 p-2 rounded-md"
+              >
+                <p className="text-[#fff] font-semibold">ADD TO CART</p>
+              </button>
             </>
           ) : (
             <>
