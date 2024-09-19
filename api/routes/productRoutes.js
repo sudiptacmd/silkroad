@@ -49,19 +49,25 @@ router.post("/new", (req, res) => {
 });
 
 // Delete Post??
-
-router.delete("/productdelete/:productId", (req, res) => {
+router.post("/delProd", (req, res) => {
+  const { prodID } = req.body;
+  const delsql = "DELETE FROM Product WHERE product_id = ?";
+  db.query(delsql, [prodID], (err, result) => {
+    if (err) {
+      return res.json({ success: false, message: err.message });
+    }
+  });
+});
+router.get("/productdelete/:productId", (req, res) => {
   const productId = req.params.productId;
   const userId = req.session.userId;
 
   if (req.session.vendor !== 1) {
-    return res
-      .status(403)
-      .json({
-        success: false,
-        message:
-          "You are not authorized to delete the product./n Delete Failed!!!",
-      });
+    return res.status(403).json({
+      success: false,
+      message:
+        "You are not authorized to delete the product./n Delete Failed!!!",
+    });
   }
   const sql = "Delete from product where product_id = ? and user_id = ?";
   db.query(sql, [productId, userId], (e, r) => {
@@ -78,12 +84,10 @@ router.delete("/productdelete/:productId", (req, res) => {
         message: "Product successfully deleted!",
       });
     } else {
-      return res
-        .status(404)
-        .json({
-          success: false,
-          message: "Product not found or not authorized to delete!",
-        });
+      return res.status(404).json({
+        success: false,
+        message: "Product not found or not authorized to delete!",
+      });
     }
   });
 });
