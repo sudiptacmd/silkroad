@@ -11,8 +11,7 @@ router.post("/buy", (req, res) => {
   console.log(quant);
   console.log(productId);
   // Check if a cart exists for the user
-  const checkCart =
-    'SELECT cart_id FROM Cart WHERE user_id = ? AND status = "ONG"';
+  const checkCart = 'SELECT cart_id FROM Cart WHERE user_id = ? AND status = "UNP"';
   db.query(checkCart, [req.session.userId], (err, results) => {
     if (err) {
       return res.json({ success: false, message: err.message });
@@ -24,7 +23,7 @@ router.post("/buy", (req, res) => {
       cartId = results[0].cart_id;
     } else {
       // No cart exists, create a new cart
-      const createCart = 'INSERT INTO Cart (user_id, status) VALUES (?, "ONG")';
+      const createCart = 'INSERT INTO Cart (user_id, status) VALUES (?, "UNP")';
       db.query(createCart, [req.session.userId], (err, result) => {
         if (err) {
           return res.json({ success: false, message: err.message });
