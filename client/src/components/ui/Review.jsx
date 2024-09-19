@@ -19,9 +19,11 @@ export default function Review(props) {
     <div className="w-full">
       <ReviewForm productId={productId} />
       <h2>Previous Reviews</h2>
-      {review.map((reviewData, index) => (
-        <Reviews key={index} reviewData={reviewData} />
-      ))}
+      {Array.isArray(review) &&
+        review.map((reviewData, index) => (
+          <Reviews key={index} reviewData={reviewData} />
+        ))}
+      {!Array.isArray(review) && <p>No reviews yet</p>}
     </div>
   );
 }
