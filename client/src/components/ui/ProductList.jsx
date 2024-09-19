@@ -1,13 +1,25 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function ProductList(props) {
   const { product } = props;
-  const rating = 0;
+  const [rating, setRating] = useState(0);
   // GET BID INFO
-  const [bidInfo, setBidInfo] = useState({
-    current_bid: 10,
-  });
+  const [maxBid, setMaxBid] = useState(0);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5100/review/rating/${product.product_id}`)
+      .then((response) => {
+        setRating(response.data.avgRating);
+      });
+    axios
+      .get(`http://localhost:5100/bid/${product.product_id}`)
+      .then((response) => {
+        if (response.data.max) setMaxBid(response.data.max);
+      })
+      .catch((error) => console.error(error));
+  }, []);
 
   return (
     <Link to={"/product/" + product.product_id}>
@@ -16,9 +28,13 @@ export default function ProductList(props) {
         className="mx-auto my-2 w-72 flex flex-col items-center p-2 shadow-md hover:shadow-2xl ease-in-out duration-300 rounded-lg"
       >
         {product.post_type ? (
-          <p className="text-md font-semibold text-green-1 my-1">AUCTION</p>
+          <p className="text-md font-semibold bg-green-2 my-1 w-full text-center p-1 text-[#fff]">
+            AUCTION
+          </p>
         ) : (
-          <p className="text-md font-semibold text-green-2 my-1">SELL POST</p>
+          <p className="text-md font-semibold bg-green-1 my-1 w-full text-center p-1 text-[#fff]">
+            SELL POST
+          </p>
         )}
         <img src={product.photo} className="w-full h-48 object-cover" />
         <p className="text-lg py-1 font-bold">{product.name}</p>
@@ -42,10 +58,24 @@ export default function ProductList(props) {
         </div>
         <p>{product.category}</p>
         {product.post_type ? (
-          <div className="font-semibold text-lg text-center">
-            <p>Latest Bid</p>
+          <div className="flex flex-row gap-2 items-center font-semibold text-lg text-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="size-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941"
+              />
+            </svg>
+
             <p className="text-green-1 text-2xl font-bold">
-              BDT {bidInfo.current_bid}{" "}
+              BDT {maxBid ? maxBid : product.bid_starting_price}
             </p>
           </div>
         ) : (
@@ -71,7 +101,7 @@ export default function ProductList(props) {
           </div>
         )}
         <div className="flex flex-row items-center gap-0.5 justify-center">
-          <p>3</p>
+          <p>{Math.floor(rating * 100) / 100}</p>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

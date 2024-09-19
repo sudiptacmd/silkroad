@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export default function Product() {
   const [product, setProduct] = useState({});
-
+  const [rating, setRating] = useState(0);
   const productId = window.location.pathname.split("/").pop();
   console.log(productId);
   const [maxBid, setMaxBid] = useState(0);
@@ -65,6 +65,11 @@ export default function Product() {
         if (response.data.max) setMaxBid(response.data.max);
       })
       .catch((error) => console.error(error));
+    axios
+      .get(`http://localhost:5100/review/rating/${productId}`)
+      .then((response) => {
+        setRating(response.data.avgRating);
+      });
   }, [productId]);
 
   return (
@@ -79,34 +84,41 @@ export default function Product() {
         <div>
           <h2 className="text-2xl font-semibold mb-5">{product.name}</h2>
           <Link to={`/shop/${product.user_id}`}>
-            <div className="flex flex-row gap-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="size-6"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+            <div className="flex flex-row gap-2 items-center">
+              {product.shop_logo ? (
+                <img
+                  src={product.shop_logo}
+                  className="rounded-full h-8 w-8 object-cover"
                 />
-              </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="size-8"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+                  />
+                </svg>
+              )}
 
-              <p>{product.shop_name}</p>
+              <p className="font-semibold text-green-2">{product.shop_name}</p>
             </div>
           </Link>
 
-          <div className="flex flex-row gap-2">
+          <div className="flex flex-row gap-2 items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               stroke-width="1.5"
               stroke="currentColor"
-              class="size-6"
+              class="size-8"
             >
               <path
                 stroke-linecap="round"
@@ -116,14 +128,14 @@ export default function Product() {
             </svg>
             <p>{product.category}</p>
           </div>
-          <div className="flex flex-row gap-2">
+          <div className="flex flex-row gap-2 items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               stroke-width="1.5"
               stroke="currentColor"
-              class="size-6"
+              class="size-8"
             >
               <path
                 stroke-linecap="round"
@@ -131,7 +143,7 @@ export default function Product() {
                 d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
               />
             </svg>
-            <p>4</p>
+            <p>{Math.floor(rating * 100) / 100}</p>
           </div>
         </div>
         <div className="flex flex-col text-center">

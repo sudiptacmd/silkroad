@@ -5,7 +5,8 @@ import db from "../db.js";
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  const sql = "SELECT product.*, user.shop_name FROM user, product WHERE user.user_id = product.user_id;";
+  const sql =
+    "SELECT product.*, user.shop_name FROM user, product WHERE user.user_id = product.user_id;";
   console.log("REQUEST RECIEVED");
 
   db.query(sql, (e, r) => {
@@ -13,7 +14,7 @@ router.get("/", (req, res) => {
       console.error(e);
       return res.status(500).json({ message: "Failed to retrieve products" });
     }
-    
+
     return res.json(r);
   });
 });
@@ -22,7 +23,6 @@ router.get("/", (req, res) => {
 router.post("/new", (req, res) => {
   const product = req.body;
   if (req.session.vendor === 1) {
-    
     const sql =
       "INSERT INTO Product (`name`,`user_id`,`photo`,`description`,`category`,`post_type`,`buy_price`,`bid_starting_price`,`bid_end_time`) VALUES (?,?,?,?,?,?,?,?,?)";
     const values = [
@@ -49,35 +49,53 @@ router.post("/new", (req, res) => {
 });
 
 // Delete Post??
-
-router.delete("/productdelete/:productId", (req, res) => {
+router.post("/delProd", (req, res) => {
+  const { prodID } = req.body;
+  const delsql = "DELETE FROM Product WHERE product_id = ?";
+  db.query(delsql, [prodID], (err, result) => {
+    if (err) {
+      return res.json({ success: false, message: err.message });
+    }
+  });
+});
+router.get("/productdelete/:productId", (req, res) => {
   const productId = req.params.productId;
   const userId = req.session.userId;
 
   if (req.session.vendor !== 1) {
-    return res.status(403).json({success: false, message: "You are not authorized to delete the product./n Delete Failed!!!"});
+    return res.status(403).json({
+      success: false,
+      message:
+        "You are not authorized to delete the product./n Delete Failed!!!",
+    });
   }
   const sql = "Delete from product where product_id = ? and user_id = ?";
-db.query(sql, [productId, userId], (e, r) => {
-  if (e) {
-    console.error(e);
-    return res.status(500).json ({success: false, message: "Product deletion failed!"});
-  
-  }
+  db.query(sql, [productId, userId], (e, r) => {
+    if (e) {
+      console.error(e);
+      return res
+        .status(500)
+        .json({ success: false, message: "Product deletion failed!" });
+    }
 
-  if (r.affectedRows > 0) {
-    return res.json({success: true, message: "Product successfully deleted!"});
-
-  } else {
-    return res.status(404).json({success: false, message: "Product not found or not authorized to delete!"})
-  }
-});
-
+    if (r.affectedRows > 0) {
+      return res.json({
+        success: true,
+        message: "Product successfully deleted!",
+      });
+    } else {
+      return res.status(404).json({
+        success: false,
+        message: "Product not found or not authorized to delete!",
+      });
+    }
+  });
 });
 
 router.get("/:productId", (req, res) => {
   const productId = req.params.productId;
-  const sql = "SELECT product.*, user.shop_name FROM user, product WHERE user.user_id = product.user_id AND product_id = ?";
+  const sql =
+    "SELECT product.*, user.shop_name, user.shop_logo FROM user, product WHERE user.user_id = product.user_id AND product_id = ?";
 
   db.query(sql, [productId], (e, r) => {
     if (e) {

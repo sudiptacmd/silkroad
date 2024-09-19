@@ -14,6 +14,7 @@ import Search from "./pages/Search";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import "./index.css";
+import Category from "./pages/Category";
 
 export default function App() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
           <Route path="/search-results" element={<Search />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/profile/:id" element={<Profile />} />
+          <Route path="category/:id" element={<Category />} />
         </Route>
       </Routes>
     </BrowserRouter>
