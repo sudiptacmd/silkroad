@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ProductList from "../components/ui/ProductList";
 import axios from "axios";
 import SellForm from "../components/forms/SellForm";
+import Categories from "../components/ui/Categories";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -36,6 +37,7 @@ export default function Home() {
   }, []);
   return (
     <div>
+      <Categories />
       <div className="flex flex-row items-center justify-center gap-3 py-12">
         <p>What type of posts to show you? </p>
         <select

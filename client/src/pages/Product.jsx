@@ -97,7 +97,7 @@ export default function Product() {
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  class="size-6"
+                  class="size-8"
                 >
                   <path
                     stroke-linecap="round"
@@ -107,18 +107,18 @@ export default function Product() {
                 </svg>
               )}
 
-              <p>{product.shop_name}</p>
+              <p className="font-semibold text-green-2">{product.shop_name}</p>
             </div>
           </Link>
 
-          <div className="flex flex-row gap-2">
+          <div className="flex flex-row gap-2 items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               stroke-width="1.5"
               stroke="currentColor"
-              class="size-6"
+              class="size-8"
             >
               <path
                 stroke-linecap="round"
@@ -128,14 +128,14 @@ export default function Product() {
             </svg>
             <p>{product.category}</p>
           </div>
-          <div className="flex flex-row gap-2">
+          <div className="flex flex-row gap-2 items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               stroke-width="1.5"
               stroke="currentColor"
-              class="size-6"
+              class="size-8"
             >
               <path
                 stroke-linecap="round"

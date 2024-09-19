@@ -25,10 +25,19 @@ export default function Dashboard() {
       {products.length > 0 && <p>Products: {products.length}</p>}
       {products.length > 0 &&
         products.map((product) => (
-          <div key={product.product_id} className="flex flex-row gap-4">
-            <p className="w-4">{product.product_id}</p>
+          <div
+            key={product.product_id}
+            className="flex flex-row gap-4 items-center "
+          >
+            <p className="w-8 h-8 p-2 bg-green-1 text-[#fff]">
+              {product.product_id}
+            </p>
             <img src={product.photo} className="w-16 h-16" />
             <p className="w-72">{product.name}</p>
+            <div className="flex flex-col items-center px-2">
+              <p className="">Sales</p>
+              <p>NUM</p>
+            </div>
             <Link to={`/product/${product.product_id}`}>
               <p>Go to Product</p>
             </Link>
