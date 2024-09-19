@@ -11,8 +11,7 @@ router.post("/buy", (req, res) => {
   console.log(quant);
   console.log(productId);
   // Check if a cart exists for the user
-  const checkCart =
-    'SELECT cart_id FROM Cart WHERE user_id = ? AND status = "UNP"';
+  const checkCart = 'SELECT cart_id FROM Cart WHERE user_id = ? AND status = "UNP"';
   db.query(checkCart, [req.session.userId], (err, results) => {
     if (err) {
       return res.json({ success: false, message: err.message });

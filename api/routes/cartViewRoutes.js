@@ -5,7 +5,7 @@ import db from "../db.js";
 const router = express.Router();
 let cartId = '';
 
-router.get("cartView", (req, res) => {
+router.get("/cartView", (req, res) => {
   const userId = req.session.userId;
   const cartsql = "SELECT * FROM cart WHERE user_id = ? AND status = 'UNP';";
 

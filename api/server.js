@@ -15,6 +15,8 @@ import searchRoutes from "./routes/searchRoutes.js";
 import viewShopRoutes from "./routes/viewShopRoutes.js";
 import reviewRoutes from "./routes/reviewRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
+import qnaViewRoutes from "./routes/qnaViewRoutes.js";
+import cartViewRoutes from "./routes/cartViewRoutes.js";
 
 const app = express();
 app.use(
@@ -50,6 +52,8 @@ app.use("/search", searchRoutes);
 app.use("/shop", viewShopRoutes);
 app.use("/review", reviewRoutes);
 app.use("/admin", adminRoutes);
+app.use("/qnaView", qnaViewRoutes);
+app.use("/cartView", cartViewRoutes);
 
 app.listen(5100, () => {
   console.log("SERVER RUNNING 5100");
