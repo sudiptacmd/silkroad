@@ -5,8 +5,7 @@ export default function Reviews(props) {
   return (
     <div>
       <p>
-        {reviewData.firstName} : {reviewData.content} : {reviewData.rating}{" "}
-        stars
+        {reviewData.firstName} {reviewData.lastName}
       </p>
     </div>
   );

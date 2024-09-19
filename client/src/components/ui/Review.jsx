@@ -16,9 +16,9 @@ export default function Review(props) {
   }, [productId]);
 
   return (
-    <div className="w-full">
+    <div className="w-full shadow-sm hover:shadow-lg p-4">
       <ReviewForm productId={productId} />
-      <h2>Previous Reviews</h2>
+      <h2 className="text-xl font-semibold my-2">Previous Reviews</h2>
       {Array.isArray(review) &&
         review.map((reviewData, index) => (
           <Reviews key={index} reviewData={reviewData} />
