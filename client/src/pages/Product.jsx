@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Review from "../components/ui/Review";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Product() {
+  const navigate = useNavigate();
   const [product, setProduct] = useState({});
   const [rating, setRating] = useState(0);
   const productId = window.location.pathname.split("/").pop();
@@ -42,10 +43,13 @@ export default function Product() {
           product_id: productId,
           quantity: 1,
         })
-        .then((r) => {
+        .then(() => {
           navigate("/cart");
         })
-        .catch((e) => console.log(e));
+        .catch((e) => {
+          console.log(e);
+          navigate("/cart");
+        });
     } catch (error) {
       console.log(error);
     }

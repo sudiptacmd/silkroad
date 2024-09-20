@@ -22,7 +22,7 @@ export default function Categories() {
   ];
   return (
     <div>
-      <ul className="flex flex-auto justify-around">
+      <ul className="flex flex-auto justify-around shadow-sm py-2">
         {categories.map((category) => (
           <li key={category} className="hover:text-green-1 duration-150">
             <Link to={`category/${category}`}>{category}</Link>
