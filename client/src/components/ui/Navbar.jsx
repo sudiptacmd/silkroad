@@ -2,40 +2,18 @@ import React, { useEffect, useState } from "react";
 import Searchbar from "../forms/Searchbar";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
-export default function Navbar() {
-  const location = useLocation();
-  const [currentPage, setCurrentPage] = useState(location.pathname);
-  const [info, setInfo] = useState({
-    name: "",
-    id: 0,
-    vendor: 0,
-    photo: "",
-    shop_id: 0,
-  });
+export default function Navbar(props) {
+  const { info } = props;
 
-  useEffect(() => {
-    setCurrentPage(location.pathname);
-    axios
-      .get("http://localhost:5100/auth/")
-      .then((r) => {
-        if (r.data.valid) {
-          setInfo({
-            name: r.data.userName,
-            id: r.data.userId,
-            vendor: r.data.vendor,
-            shop_id: r.data.shopName,
-            photo: r.data.userPhoto,
-          });
-        }
-      })
-      .catch((err) => console.log(err));
-  }, [[location.pathname]]);
   return (
     <div className="flex justify-between items-center">
       <Link to="/">
         <span className="flex justify-start items-center">
           <img className="size-16" src="/logo.png" alt="" />
-          <h3>SilkRoad</h3>
+          <span className="flex flex-row text-lg md:text-2xl font-bold">
+            <h3 className="text-green-1 ">Silk</h3>
+            <h3 className="text-green-2 ">Road</h3>
+          </span>
         </span>
       </Link>
       <Searchbar />

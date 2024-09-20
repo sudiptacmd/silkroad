@@ -10,17 +10,19 @@ import productRoutes from "./routes/productRoutes.js";
 import buyRoutes from "./routes/buyRoutes.js";
 import bidRoutes from "./routes/bidRoutes.js";
 import payRoutes from "./routes/payRoutes.js";
-import ongRoutes from "./routes/ongRoutes.js";
+import profileRoutes from "./routes/profileRoutes.js";
 import searchRoutes from "./routes/searchRoutes.js";
 import viewShopRoutes from "./routes/viewShopRoutes.js";
 import reviewRoutes from "./routes/reviewRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
+import qnaViewRoutes from "./routes/qnaViewRoutes.js";
+import cartViewRoutes from "./routes/cartViewRoutes.js";
 
 const app = express();
 app.use(
   cors({
     origin: ["http://localhost:5173"],
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
@@ -45,11 +47,13 @@ app.use("/product", productRoutes);
 app.use("/buy", buyRoutes);
 app.use("/bid", bidRoutes);
 app.use("/pay", payRoutes);
-app.use("/ong", ongRoutes);
+app.use("/profile", profileRoutes);
 app.use("/search", searchRoutes);
 app.use("/shop", viewShopRoutes);
 app.use("/review", reviewRoutes);
 app.use("/admin", adminRoutes);
+app.use("/qnaView", qnaViewRoutes);
+app.use("/cartView", cartViewRoutes);
 
 app.listen(5100, () => {
   console.log("SERVER RUNNING 5100");

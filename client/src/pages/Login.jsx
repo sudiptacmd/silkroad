@@ -6,7 +6,11 @@ export const Login = () => {
   return (
     <div>
       <LoginForm />
-      <Link to="/register">Click Here to Register</Link>
+      <Link to="/register">
+        <p className="text-center my-1 text-green-2 font-semibold">
+          Click Here to Register
+        </p>
+      </Link>
     </div>
   );
 };
