@@ -9,11 +9,11 @@ router.post("/", (req, res) => {
     return res.status(401).json({ message: "Unauthorized" });
   } else {
 
-    const cartId = req.body;
-    console.log(cartId);
+    const userId = req.session.userId;
+    console.log(userId);
 
-    const paysql = "UPDATE Cart SET status = 'PAI' WHERE cart_id = ?";
-    db.query(paysql, [cartId], (err, result) => {
+    const paysql = "UPDATE Cart SET status = 'PAI' WHERE user_id = ? AND status = 'UNP'";
+    db.query(paysql, [userId], (err, result) => {
       if (err) {
         console.log(err);
         return res.json({ success: false, message: err.message });
@@ -21,12 +21,12 @@ router.post("/", (req, res) => {
 
       console.log("payed");
     });
-    // const newCartsql = "INSERT INTO Cart (user_id, status) VALUES (?, 'UNP')";
-    //   db.query(newCartsql, [req.session.userId], (err, result) => {
-    //       if (err) {
-    //       return res.json({ success: false, message: err.message });
-    //       }
-    //   });
+    const newCartsql = "INSERT INTO Cart (user_id, status) VALUES (?, 'UNP')";
+      db.query(newCartsql, [userId], (err, result) => {
+          if (err) {
+          return res.json({ success: false, message: err.message });
+          }
+      });
 
   }
 

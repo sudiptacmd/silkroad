@@ -7,7 +7,7 @@ export default function Dashboard() {
   const [products, setProducts] = useState([]);
   const handleRemove = (product_id) => {
     axios
-      .get(`localhost:5100/product/delProd`, { prodID: product_id })
+      .post(`http://localhost:5100/product/productdelete`, { prodID: product_id })
       .then((r) => navigate("/"))
       .catch((e) => console.log(e));
   };
@@ -27,27 +27,53 @@ export default function Dashboard() {
         products.map((product) => (
           <div
             key={product.product_id}
-            className="flex flex-row gap-4 items-center "
+            className="flex flex-row gap-4 items-center w-[100vw] justify-space-around p-4"
           >
             <p className="w-8 h-8 p-2 bg-green-1 text-[#fff]">
               {product.product_id}
             </p>
-            <img src={product.photo} className="w-16 h-16" />
-            <p className="w-72">{product.name}</p>
-            <div className="flex flex-col items-center px-2">
+
+            <div className="w-[20vw]">
+
+              <img src={product.photo} className="w-16 h-16 origin-contain" />
+              <p className="w-[20vw]">{product.name}</p>
+
+            </div>
+
+            <div className="w-[10vw]">
+              {product.status === 'APP'
+                ? (<span className="text-green-1">{product.status}</span>
+
+                ) : (<span className="text-red-1">{product.status}</span>)
+              }
+            </div>
+
+
+            <div className="w-[10vw] flex flex-col items-center ">
+              <p className="">Price</p>
+              <p>{product.buy_price}</p>
+            </div>
+
+            <div className="w-[10vw] flex flex-col items-center ">
               <p className="">Sales</p>
               <p>NUM</p>
             </div>
-            <Link to={`/product/${product.product_id}`}>
-              <p>Go to Product</p>
-            </Link>
+            <div className="w-[10vw] flex flex-col items-center ">
 
-            <button
-              onClick={() => handleRemove(product.product_id)}
-              className="p-4 bg-red-1 text-[#fff]"
-            >
-              Remove
-            </button>
+              <Link to={`/product/${product.user_id}`}>
+                <p>Go to Product</p>
+              </Link>
+            </div>
+
+            <div className="w-[10vw] flex flex-col items-center ">
+
+              <button
+                onClick={() => handleRemove(product.product_id)}
+                className=" p-4 bg-red-1 text-[#fff] rounded-md"
+              >
+                Remove
+              </button>
+            </div>
           </div>
         ))}
     </div>
