@@ -34,6 +34,24 @@ export const RegistrationForm = () => {
       console.log(error);
     }
   };
+  const handlePhotoUpload = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = (event) => {
+      const photoData = event.target.result;
+      const photoPath = `./uploads/${file.name}`;
+
+      // Save the photo to local storage
+      fs.writeFileSync(photoPath, photoData);
+
+      // Save the photo path in login.photo
+      const login = { ...login, photo: photoPath };
+      setLogin(login);
+    };
+
+    reader.readAsArrayBuffer(file);
+  };
   return (
     <div className="w-96 mx-auto">
       <h1 className="text-3xl text-center text-green-1 my-4">Registration</h1>
@@ -76,12 +94,14 @@ export const RegistrationForm = () => {
           placeholder="Last Name"
         />
         <label htmlFor="photo">Photo</label>
-        <input
+        {/* <input
           type="text"
           name="photo"
           onChange={handleInput}
           placeholder="Photo"
-        />
+        /> */}
+        <input type="file" onChange={handlePhotoUpload} />
+        {login.photo && <p>Photo Path: {login.photo}</p>}
         <label htmlFor="address">Address</label>
         <input
           type="text"

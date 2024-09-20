@@ -74,7 +74,7 @@ router.post("/signup", (req, res) => {
 
     // Create a new cart for the user
     if (!reg.vendor) {
-      const sql2 = "SELECT user_id FROM user WHERE email = ? AND password = ?";
+      const sql2 = "SELECT user_id FROM User WHERE email = ? AND password = ?";
       db.query(sql2, [reg.email, reg.password], (e, r) => {
         if (e) return res.json({ message: e.message });
 
