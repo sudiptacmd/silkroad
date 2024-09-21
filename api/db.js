@@ -6,6 +6,7 @@ export default mysql.createConnection({
 
   password: "admin",
 
+
   database: "silkroad",
 });
 //database working?
