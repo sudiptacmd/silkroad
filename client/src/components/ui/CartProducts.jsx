@@ -3,8 +3,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function CartProducts(props) {
-  const { product, type } = props;
-  const navigate = useNavigate();
+  const { product, setCount } = props;
 
   const total = product.quantity * product.buy_price;
 
@@ -19,6 +18,7 @@ export default function CartProducts(props) {
           ])
           .then((r) => {
             console.log(r);
+            setCount(count + 1);
           })
           .catch((e) => console.log(e));
       } catch (error) {
@@ -35,6 +35,7 @@ export default function CartProducts(props) {
           ])
           .then((r) => {
             console.log(r);
+            setCount(count + 1);
           })
           .catch((e) => console.log(e));
       } catch (error) {
@@ -52,6 +53,7 @@ export default function CartProducts(props) {
         ])
         .then((r) => {
           console.log(r);
+          setCount(count + 1);
         })
         .catch((e) => {
           console.log(e);
@@ -71,6 +73,7 @@ export default function CartProducts(props) {
         ])
         .then((r) => {
           console.log(r);
+          setCount(count + 1);
         })
         .catch((e) => console.log(e));
     } catch (error) {
@@ -101,7 +104,7 @@ export default function CartProducts(props) {
       <div className="flex flex-row items-center w-32">
         <button
           onClick={decreaseItem}
-          className="ml-2 mr-2 p-1 bg-green-1 hover:bg-green-2 rounded text-white text-center text-lg"
+          className="ml-2 mr-2 p-1 bg-green-1 hover:bg-green-2 rounded text-white text-center text-lg text-[#fff] font-bold duration-500"
         >
           -
         </button>
@@ -110,7 +113,7 @@ export default function CartProducts(props) {
 
         <button
           onClick={increaseItem}
-          className="ml-2 mr-2 p-1 bg-green-1 hover:bg-green-2 rounded text-white text-center text-lg"
+          className="ml-2 mr-2 p-1 bg-green-1 hover:bg-green-2 rounded text-white text-center text-lg text-[#fff] font-bold duration-500"
         >
           +
         </button>
@@ -118,7 +121,7 @@ export default function CartProducts(props) {
 
       <button
         onClick={removeItem}
-        className="ml-2 mr-2 p-1 bg-red-1 hover bg-red-2 rounded text-white font-bold text-center text-lg"
+        className="mx-2 bg-red-1 hover:bg-[#d33a3a] text-[#fff]  text-center text-lg p-2 rounded-xl duration-500"
       >
         Remove
       </button>
