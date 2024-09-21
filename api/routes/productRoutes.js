@@ -7,6 +7,7 @@ const router = express.Router();
 router.get("/", (req, res) => {
   const sql =
     "SELECT product.*, user.shop_name FROM user, product WHERE user.user_id = product.user_id AND product.status = 'APP' ";
+
   console.log("REQUEST RECIEVED");
 
   db.query(sql, (e, r) => {
@@ -61,7 +62,9 @@ router.post("/productdelete", (req, res) => {
         "You are not authorized to delete the product./n Delete Failed!!!",
     });
   }
+
   const sql = "UPDATE Cart SET status = 'PAI' WHERE product_id = ? and user_id = ?";
+
   db.query(sql, [productId, userId], (e, r) => {
     if (e) {
       console.error(e);
@@ -87,7 +90,7 @@ router.post("/productdelete", (req, res) => {
 router.get("/:productId", (req, res) => {
   const productId = req.params.productId;
   const sql =
-    "SELECT product.*, user.shop_name, user.shop_logo FROM user, product WHERE user.user_id = product.user_id AND product_id = ?";
+    "SELECT Product.*, User.shop_name, User.shop_logo FROM User, Product WHERE User.user_id = Product.user_id AND product_id = ?";
 
   db.query(sql, [productId], (e, r) => {
     if (e) {

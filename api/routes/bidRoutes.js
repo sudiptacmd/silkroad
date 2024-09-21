@@ -8,7 +8,6 @@ router.post("/bid", (req, res) => {
   const bid = req.body;
 
   if (req.session.userId) {
-    
     const sql = "INSERT INTO Bids (bid_on, bid_by, amount) VALUES(?,?,?)";
     const values = [bid.product_id, req.session.userId, bid.amount];
 
@@ -30,17 +29,16 @@ router.post("/bid", (req, res) => {
 
 router.get("/:productId", (req, res) => {
   const productId = req.params.productId;
-  
-  const sql = "SELECT MAX(amount) AS max FROM bids WHERE bid_on = ?";
+
+  const sql = "SELECT MAX(amount) AS max FROM Bids WHERE bid_on = ?";
   db.query(sql, [productId], (e, r) => {
     if (e) {
       console.error(e);
       return res.json({ success: false, message: e.message });
     }
-    
+
     return res.json(r[0]);
   });
 });
-
 
 export default router;
