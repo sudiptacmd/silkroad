@@ -41,6 +41,24 @@ router.post("/login", (req, res) => {
   });
 });
 
+//LOGOUT [Button needed!]
+router.post("/logout", (req, res) => {
+  //Checking if the user is logged in or not. Might not be necessary.
+  if (req.session.userId) {
+    req.session.destroy((err) => {
+      if (err) {
+        console.error("Error logging out. ", err); //error log for debugging
+        return res.status(500).json({success: false, message: "Failed to log out. \nPlease try again."});
+      }
+      res.clearCookie("connect.sid"); //Clearing session cookie
+      return res.json({success: true, message:"Logged out successfully! Thank you for being with us."});
+
+    });
+  } else {
+    return res.json({success: false, message: "No user is logged in."});
+  }
+});
+
 //SIGN-UP[POST]
 router.post("/signup", (req, res) => {
   const reg = req.body;

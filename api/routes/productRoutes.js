@@ -51,8 +51,8 @@ router.post("/new", (req, res) => {
 
 // Delete Post??
 
-router.post("/productdelete", (req, res) => {
-  const productId = req.body.prodID;
+router.post("/productdelete/:productId", (req, res) => {
+  const productId = req.params.productId;
   const userId = req.session.userId;
 
   if (req.session.vendor !== 1) {
@@ -63,7 +63,7 @@ router.post("/productdelete", (req, res) => {
     });
   }
 
-  const sql = "UPDATE Cart SET status = 'PAI' WHERE product_id = ? and user_id = ?";
+  const sql = "UPDATE product SET status = 'WFA' WHERE product_id = ? AND user_id = ?";
 
   db.query(sql, [productId, userId], (e, r) => {
     if (e) {
