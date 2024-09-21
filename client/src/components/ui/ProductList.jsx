@@ -16,6 +16,7 @@ export default function ProductList(props) {
     axios
       .get(`http://localhost:5100/bid/${product.product_id}`)
       .then((response) => {
+        
         if (response.data.max) setMaxBid(response.data.max);
       })
       .catch((error) => console.error(error));
