@@ -36,7 +36,7 @@ export default function Home() {
       .catch((err) => console.log(err));
   }, []);
   return (
-    <div>
+    <div className="mb-20">
       <Categories />
       <div className="flex flex-row items-center justify-center gap-3 py-12">
         <p>What type of posts to show you? </p>
