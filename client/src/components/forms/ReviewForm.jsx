@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 
 export default function ReviewForm(props) {
-  const productId = props.productId;
+  const { productId, setRefresh } = props;
   const [review, setReview] = useState({
     productId: parseInt(productId),
     rating: 0,
@@ -28,7 +28,7 @@ export default function ReviewForm(props) {
         .post("http://localhost:5100/review", { review: review })
         .then((r) => {
           console.log(r);
-          alert("Review posted successfully!");
+          setRefresh((refresh) => refresh + 1);
         })
         .catch((e) => console.log(e));
     } catch (error) {

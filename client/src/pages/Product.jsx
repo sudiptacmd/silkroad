@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Review from "../components/ui/Review";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import QnA from "../components/ui/QnA";
 
 export default function Product() {
   const navigate = useNavigate();
@@ -200,6 +201,7 @@ export default function Product() {
           <p className="text-justify">{product.description}</p>
         </div>
       </div>
+      <QnA productId={productId} />
       <Review productId={productId} />
     </div>
   );
