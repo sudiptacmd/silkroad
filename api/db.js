@@ -4,8 +4,8 @@ export default mysql.createConnection({
   host: "localhost",
   user: "root",
 
-  password: "admin",
 
+  password: "admin",
 
   database: "silkroad",
 });

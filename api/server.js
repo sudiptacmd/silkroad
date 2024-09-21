@@ -18,6 +18,7 @@ import adminRoutes from "./routes/adminRoutes.js";
 import qnaViewRoutes from "./routes/qnaViewRoutes.js";
 import cartViewRoutes from "./routes/cartViewRoutes.js";
 
+
 const app = express();
 app.use(
   cors({
