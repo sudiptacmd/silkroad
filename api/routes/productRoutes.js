@@ -6,7 +6,8 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
   const sql =
-    "SELECT Product.*, User.shop_name FROM User, Product WHERE User.user_id = Product.user_id;";
+    "SELECT product.*, user.shop_name FROM user, product WHERE user.user_id = product.user_id AND product.status = 'APP' ";
+
   console.log("REQUEST RECIEVED");
 
   db.query(sql, (e, r) => {
@@ -49,17 +50,9 @@ router.post("/new", (req, res) => {
 });
 
 // Delete Post??
-router.post("/delProd", (req, res) => {
-  const { prodID } = req.body;
-  const delsql = "DELETE FROM Product WHERE product_id = ?";
-  db.query(delsql, [prodID], (err, result) => {
-    if (err) {
-      return res.json({ success: false, message: err.message });
-    }
-  });
-});
-router.get("/productdelete/:productId", (req, res) => {
-  const productId = req.params.productId;
+
+router.post("/productdelete", (req, res) => {
+  const productId = req.body.prodID;
   const userId = req.session.userId;
 
   if (req.session.vendor !== 1) {
@@ -69,7 +62,9 @@ router.get("/productdelete/:productId", (req, res) => {
         "You are not authorized to delete the product./n Delete Failed!!!",
     });
   }
-  const sql = "Delete from Product where product_id = ? and user_id = ?";
+
+  const sql = "UPDATE Cart SET status = 'PAI' WHERE product_id = ? and user_id = ?";
+
   db.query(sql, [productId, userId], (e, r) => {
     if (e) {
       console.error(e);
