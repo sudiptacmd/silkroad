@@ -2,8 +2,13 @@ import React, { useEffect, useState } from "react";
 import Searchbar from "../forms/Searchbar";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
+import ProfileDropdown from "./ProfileDropdown";
+
+
 export default function Navbar(props) {
   const { info } = props;
+
+  const [dropProfile, setDropProfile] = useState(false);
 
   return (
     <div className="flex justify-between items-center">
@@ -90,14 +95,37 @@ export default function Navbar(props) {
             </svg>
           </Link>
         ) : (
-          <Link to={`/profile/${info.id}`}>
+
+          < span 
+            onClick={() => setDropProfile((prev) => !prev)}
+            className="flex justify-center items-center cursor-pointer"
+          >
+
             <img
               className="size-8 ml-2 border-2 border-green-1 rounded-full"
               src={info.photo}
               alt=""
             />
-          </Link>
+
+
+
+          </span>
+
+
+
+
+
+
+
+
+
+
         )}
+
+        {
+          dropProfile && <ProfileDropdown id={info.id}/>
+
+        }
       </span>
     </div>
   );

@@ -1,7 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 export default function Profile() {
+
+  const navigate = useNavigate();
+
   const [info, setInfo] = useState({
     name: "",
     id: 0,
@@ -10,6 +13,8 @@ export default function Profile() {
     shop_name: 0,
     shop_logo: 0,
   });
+
+  
 
   useEffect(() => {
     axios
@@ -54,14 +59,23 @@ export default function Profile() {
                 <img src={info.shop_logo} alt="" className="w-[5] h-[5vh] " />
               </div>
 
-              
-
-
             </>
           )}
         </div>
 
 
+
+
+      </div>
+      <div>
+        <button
+          className="w-full text-center text-3xl font-bold my-10 text-[#ffffff] border-2 rounded-lg border-green-2 bg-green-2 hover:bg-green-1 hover:text-green-2 " 
+          onClick={() => {
+            navigate("/update-profile");
+          }}
+        >
+          Update Profile
+        </button>
       </div>
     </div>
   );
