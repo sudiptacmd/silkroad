@@ -20,6 +20,7 @@ import cartViewRoutes from "./routes/cartViewRoutes.js";
 import historyRoutes from "./routes/historyRoutes.js";
 import sellRoutes from "./routes/sellRoutes.js";
 
+
 const app = express();
 app.use(
   cors({

@@ -15,6 +15,7 @@ import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import "./index.css";
 import Category from "./pages/Category";
+import UpdateProfile from "./pages/UpdateProfile";
 
 export default function App() {
   return (
@@ -33,6 +34,7 @@ export default function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/profile/:id" element={<Profile />} />
           <Route path="category/:id" element={<Category />} />
+          <Route path = "update-profile" element={<UpdateProfile />} />
         </Route>
       </Routes>
     </BrowserRouter>

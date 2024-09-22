@@ -7,7 +7,7 @@ export default function Dashboard() {
   const [products, setProducts] = useState([]);
   const handleRemove = (product_id) => {
     axios
-      .post(`http://localhost:5100/product/productdelete`, { prodID: product_id })
+      .post(`http://localhost:5100/product/productdelete/${product_id}`)
       .then((r) => navigate("/"))
       .catch((e) => console.log(e));
   };
@@ -18,7 +18,7 @@ export default function Dashboard() {
         setProducts(response.data);
       })
       .catch((e) => console.log(e));
-  });
+  }, []);
   return (
     <div>
       <h1>Dashboard</h1>

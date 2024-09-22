@@ -6,6 +6,8 @@ import axios from "axios";
 export default function Review(props) {
   const { productId } = props;
   const [review, setReview] = useState([]);
+  const [refresh, setRefresh] = useState(0);
+
   useEffect(() => {
     axios
       .get(`http://localhost:5100/review/${productId}`)
@@ -13,11 +15,12 @@ export default function Review(props) {
         setReview(response.data);
       })
       .catch((error) => console.error(error));
-  }, [productId]);
+  }, [refresh]);
 
   return (
     <div className="w-full shadow-sm hover:shadow-lg p-4 duration-200">
-      <ReviewForm productId={productId} />
+      <ReviewForm productId={productId} setRefresh={setRefresh} />
+
       <h2 className="text-xl font-semibold my-2">Previous Reviews</h2>
       {Array.isArray(review) &&
         review.map((reviewData, index) => (
