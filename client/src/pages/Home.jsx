@@ -3,7 +3,6 @@ import ProductList from "../components/ui/ProductList";
 import axios from "axios";
 import SellForm from "../components/forms/SellForm";
 import Categories from "../components/ui/Categories";
-
 export default function Home() {
   const [products, setProducts] = useState([]);
   const [show, setShow] = useState("all");
@@ -38,6 +37,7 @@ export default function Home() {
   return (
     <div className="mb-20">
       <Categories />
+      {/* <CarouselTransition /> */}
       <div className="flex flex-row items-center justify-center gap-3 py-12">
         <p>What type of posts to show you? </p>
         <select
