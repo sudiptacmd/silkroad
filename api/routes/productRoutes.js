@@ -63,7 +63,8 @@ router.post("/productdelete", (req, res) => {
     });
   }
 
-  const sql = "UPDATE Cart SET status = 'PAI' WHERE product_id = ? and user_id = ?";
+  const sql =
+    "UPDATE Cart SET status = 'PAI' WHERE product_id = ? and user_id = ?";
 
   db.query(sql, [productId, userId], (e, r) => {
     if (e) {
@@ -103,6 +104,18 @@ router.get("/:productId", (req, res) => {
     } else {
       return res.status(404).json({ message: "Product not found" });
     }
+  });
+});
+router.get("/sellInfo", (req, res) => {
+  const { prodId } = req.body;
+  const sellsql =
+    "SELECT SUM(ci.quantity) as sell quantity FROM cart_item ci JOIN cart c ON ci.cart_id = c.cart_id WHERE c.status = 'PAI' AND ci.prod_id = ?;";
+  db.query(sellsql, [prodId], (e, r) => {
+    if (e) {
+      console.error(e);
+      return res.json({ message: e.message });
+    }
+    return res.json(r);
   });
 });
 
