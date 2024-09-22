@@ -44,12 +44,9 @@ export default function Product() {
           product_id: productId,
           quantity: 1,
         })
-        .then(() => {
-          navigate("/cart");
-        })
+        .then()
         .catch((e) => {
           console.log(e);
-          navigate("/cart");
         });
     } catch (error) {
       console.log(error);
