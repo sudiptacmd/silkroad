@@ -17,6 +17,8 @@ import reviewRoutes from "./routes/reviewRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import qnaViewRoutes from "./routes/qnaViewRoutes.js";
 import cartViewRoutes from "./routes/cartViewRoutes.js";
+import historyRoutes from "./routes/historyRoutes.js";
+import sellRoutes from "./routes/sellRoutes.js";
 
 const app = express();
 app.use(
@@ -54,6 +56,8 @@ app.use("/review", reviewRoutes);
 app.use("/admin", adminRoutes);
 app.use("/qnaView", qnaViewRoutes);
 app.use("/cartView", cartViewRoutes);
+app.use("/history", historyRoutes);
+app.use("/sell", sellRoutes);
 
 app.listen(5100, () => {
   console.log("SERVER RUNNING 5100");
