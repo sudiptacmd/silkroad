@@ -1,25 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import index  from "../../pages/Home";
+import index from "../../pages/Home";
 export const UpdateProfileForm = () => {
   const navigate = useNavigate();
   const [upInfo, setUpInfo] = useState({
-    email: "",
-    fistName: "",
-    lastName: "",
-    password: "",
-    photo: "",
-    address: "",
-    phone: "",
-    vendor: 0,
-    
-    shop_name: "",
-    shop_logo: "",
+    // email: "",
+    // fistName: "",
+    // lastName: "",
+    // password: "",
+    // photo: "",
+    // address: "",
+    // phone: "",
+    // vendor: 0,
+    // shop_name: "",
+    // shop_logo: "",
   });
-  const handleInput = (e) => {
-    setUpInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+  const handleInput = useCallback(
+    (e) => {
+      setUpInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    },
+    [upInfo]
+  );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,13 +38,10 @@ export const UpdateProfileForm = () => {
     }
   };
 
-  
-
   useEffect(() => {
-    axios // get login info
+    axios
       .get("http://localhost:5100/profile")
       .then((r) => {
-        console.log(r.data);
         setUpInfo({
           ...upInfo,
           email: r.data.email,
@@ -53,23 +52,18 @@ export const UpdateProfileForm = () => {
           phone: r.data.phone,
           shop_name: r.data.shop_name,
           shop_logo: r.data.shop_logo,
-          vendor: r.data.vendor,
-
         });
-
       })
-      .catch ((e) => console.log(e))
-      
-  }, []);
+      .catch((e) => console.log(e));
+  }, [upInfo]);
 
   return (
     <div className="w-96 mx-auto">
-      <h1 className="text-3xl text-center text-green-1 my-4">Update Your Profile</h1>
+      <h1 className="text-3xl text-center text-green-1 my-4">
+        Update Your Profile
+      </h1>
 
-      
       <form onSubmit={handleSubmit} className="flex flex-col gap-2 py-4 ">
-        
-        
         <label htmlFor="email">E-mail</label>
         <input
           type="email"
@@ -114,8 +108,6 @@ export const UpdateProfileForm = () => {
           placeholder="Photo"
         />
 
-        
-
         {upInfo.photo && <p>Photo Path: {upInfo.photo}</p>}
 
         <label htmlFor="address">Address</label>
@@ -137,8 +129,7 @@ export const UpdateProfileForm = () => {
           value={upInfo.phone}
         />
 
-        {
-          upInfo.vendor ? 
+        {upInfo.vendor ? (
           <>
             <hr />
             <p>Shop Details</p>
@@ -156,14 +147,17 @@ export const UpdateProfileForm = () => {
               onChange={handleInput}
               placeholder="Shop Logo"
             />
+          </>
+        ) : (
+          <> </>
+        )}
 
-          </> : <> </>
-        }
-        
-        
-        <button 
-        className="bg-green-1 text-white font-bold py-2 rounded px-4 hover:bg-green-2 hover:text-green-1"
-        type="submit">UPDATE</button>
+        <button
+          className="bg-green-1 text-white font-bold py-2 rounded px-4 hover:bg-green-2 hover:text-green-1"
+          type="submit"
+        >
+          UPDATE
+        </button>
       </form>
     </div>
   );

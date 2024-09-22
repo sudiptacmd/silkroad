@@ -16,7 +16,9 @@ export default function Category() {
   }, []);
   return (
     <div>
-      <h1>{filter} store</h1>
+      <h1 className="text-4xl text-center font-bold m-4 text-green-2">
+        {filter} store
+      </h1>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mx-auto">
         {products
           .filter((product) => product.category === filter)
